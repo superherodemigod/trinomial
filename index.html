@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>Routine trinomial</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  </head>
+  <body>
+    <label for="">Expression: </label>
+    <div id="expression">
+      <p>X<sup>2</sup></p>
+      <p class="operator"></p>
+      <p id="first"></p>
+      <p id="equal">=</p>
+      <p id="second"></p>
+    </div>
+    <div>
+      <label for="">Result: </label>
+      <div id="result">
+        <p>X</p>
+        <p class="operator"></p>
+        <input type="number" id="a" name="a" />
+        <p>, X</p>
+        <p class="operator"></p>
+        <input type="number" id="b" name="b" />
+        <button id="checkbtn" onclick="">Check</button>
+      </div>
+    </div>
+    <div id="alertPro"></div>
+    <div id="alertSum"></div>
+  </body>
+  <script>
+    $(document).ready(function () {
+      let a;
+      let b;
+      let makeExperssion = () => {
+        a = Math.floor(Math.random() * 99) + 1;
+
+        b = Math.floor(Math.random() * Math.floor(99 / a)) + 1;
+
+        let operator = Math.random() < 0.5;
+        if (operator == true) {
+          $(".operator").html("+");
+        } else {
+          $(".operator").html("-");
+        }
+        $("#first").html(a + b + "X");
+        $("#second").html(a * b);
+      };
+      makeExperssion();
+      $("#checkbtn").click(function () {
+        console.log("Aaaa");
+        let result1 = $("#a").val();
+        let result2 = $("#b").val();
+
+        if ((result1 == a && result2 == b)||(result1 == b && result2 == a)) {
+          $("#alertPro").html("Correct");
+          $("#alertSum").html("");
+          makeExperssion();
+        //   a = parseInt(result1);
+        //   b = parseInt(result2);
+        } else {
+          if (result1 * result2 > a * b) {
+            $("#alertPro").html("Sorry, the product is too high");
+          }
+          if (result1 * result2 < a * b) {
+            $("#alertPro").html("Sorry, the product is too low");
+          }
+          if (parseInt(result1) + parseInt(result2) > a + b) {
+            $("#alertSum").html("Sorry, the sum is too high");
+          }
+          if (parseInt(result1) + parseInt(result2) < a + b) {
+            $("#alertSum").html("Sorry, the sum is too low");
+          }
+        }
+      });
+    });
+  </script>
+  <style>
+    #expression,
+    #result {
+      display: inline-flex;
+      align-items: center;
+    }
+    .operator {
+      font-size: 23px;
+    }
+    #equal {
+      font-size: 23px;
+    }
+    p {
+      font-size: 20px;
+    }
+    #first,
+    #second {
+      padding: 4px;
+    }
+    #a,
+    #b {
+      margin-right: 50px;
+    }
+    input {
+      width: 50px;
+      font-size: 20px;
+      height: 30px;
+    }
+    button {
+      height: 30px;
+    }
+  </style>
+</html>
